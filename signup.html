@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/signupstyle.css">
+    <title>Signup</title>
+    
+</head>
+<body>
+
+    <div class="container">
+        
+        <form id="signupForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+    <br>
+            <label for="age">age:</label>
+            <input type="number" id="age" name="age" required>
+    <br>
+            <label for="dob">dob:</label>
+            <input type="date" id="dob" name="dob" required>
+<br>
+            <label for="email">email:</label>
+            <input type="email" id="email" name="email" required>
+<br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+             
+    
+             
+           <input onclick="redirectToSignup()" type="submit" value="submit">
+        </form> 
+    
+       
+        
+    </div>
+
+<script>
+   
+   function redirectToSignup() {
+            window.location.href = "login.html";
+        }
+    document.getElementById("signupForm").addEventListener('submit', postName);
+
+    function postName(event) {
+        event.preventDefault();
+
+        var username = document.getElementById("username").value;
+        var age = document.getElementById("age").value;
+        var dob = document.getElementById("dob").value;
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+
+        // Validate and sanitize user inputs (consider using a library or custom functions)
+
+        var params = "username=" + encodeURIComponent(username) +
+                     "&dob=" + encodeURIComponent(dob) +
+                     "&age=" + encodeURIComponent(age) +
+                     "&email=" + encodeURIComponent(email) +
+                     "&password=" + encodeURIComponent(password);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "signup_process.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                console.log(this.responseText);
+                // Process the response here
+            } else {
+                console.error("Error: " + xhr.status);
+            }
+        };
+
+        xhr.send(params);
+    }
+</script>
+
+
+</script>
+
+</body>
+</html>
